@@ -1,0 +1,398 @@
+
+/* ==========================================
+   ANIMATED FERRIS WHEEL
+   Author: Stephen Oyugi
+   Technologies: HTML5 + CSS3
+========================================== */
+
+/* ---------- CSS RESET ---------- */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ---------- DESIGN VARIABLES ---------- */
+
+:root {
+  --background: #07111f;
+  --surface: #101e30;
+  --primary: #38bdf8;
+  --secondary: #818cf8;
+  --text: #f8fafc;
+  --muted: #94a3b8;
+  --wheel-color: #cbd5e1;
+}
+
+/* ---------- BODY ---------- */
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, #172d49 0%, transparent 55%),
+    var(--background);
+
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow-x: hidden;
+}
+
+/* ---------- MAIN SCENE ---------- */
+
+.scene {
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 20px 25px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 35px;
+}
+
+/* ---------- HEADER ---------- */
+
+.page-header {
+  text-align: center;
+}
+
+.eyebrow {
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.page-header h1 {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.subtitle {
+  color: var(--muted);
+  margin-top: 12px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+/* ---------- WHEEL CONTAINER ---------- */
+
+.wheel-container {
+  width: min(80vw, 520px);
+  aspect-ratio: 1;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- FERRIS WHEEL ---------- */
+
+.wheel {
+  width: 100%;
+  height: 100%;
+
+  border: 4px solid var(--wheel-color);
+  border-radius: 50%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  animation: wheel 12s linear infinite;
+}
+
+/* ---------- SPOKES ---------- */
+
+.line {
+  position: absolute;
+
+  width: 50%;
+  height: 3px;
+
+  top: 50%;
+  left: 50%;
+
+  background: linear-gradient(
+    to right,
+    var(--primary),
+    var(--wheel-color)
+  );
+
+  transform-origin: 0% 0%;
+}
+
+/* Six spoke positions */
+
+.line:nth-of-type(2) {
+  transform: rotate(60deg);
+}
+
+.line:nth-of-type(3) {
+  transform: rotate(120deg);
+}
+
+.line:nth-of-type(4) {
+  transform: rotate(180deg);
+}
+
+.line:nth-of-type(5) {
+  transform: rotate(240deg);
+}
+
+.line:nth-of-type(6) {
+  transform: rotate(300deg);
+}
+
+/* ---------- CABINS ---------- */
+
+.cabin {
+  position: absolute;
+
+  width: 19%;
+  height: 19%;
+
+  border: 3px solid white;
+  border-radius: 12px 12px 18px 18px;
+
+  transform-origin: 50% 0%;
+
+  background: #ef4444;
+
+  box-shadow:
+    0 0 15px rgba(255, 255, 255, 0.2),
+    inset 0 0 12px rgba(255, 255, 255, 0.15);
+
+  animation: cabins 12s linear infinite;
+}
+
+/* Cabin 1 */
+
+.cabin:first-of-type {
+  right: -8%;
+  top: 50%;
+}
+
+/* Cabin 2 */
+
+.cabin:nth-of-type(2) {
+  right: 16%;
+  top: 92%;
+}
+
+/* Cabin 3 */
+
+.cabin:nth-of-type(3) {
+  right: 65%;
+  top: 92%;
+}
+
+/* Cabin 4 */
+
+.cabin:nth-of-type(4) {
+  left: -8%;
+  top: 50%;
+}
+
+/* Cabin 5 */
+
+.cabin:nth-of-type(5) {
+  left: 16%;
+  top: 7%;
+}
+
+/* Cabin 6 */
+
+.cabin:nth-of-type(6) {
+  right: 16%;
+  top: 7%;
+}
+
+/* ---------- CENTRE HUB ---------- */
+
+.hub {
+  width: 11%;
+  height: 11%;
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  background: var(--primary);
+  border: 5px solid white;
+  border-radius: 50%;
+
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.6);
+
+  z-index: 5;
+}
+
+/* ---------- SUPPORT STRUCTURE ---------- */
+
+.support {
+  position: absolute;
+
+  width: 65%;
+  height: 30%;
+
+  top: 78%;
+  left: 17.5%;
+
+  z-index: -1;
+}
+
+.support-leg {
+  position: absolute;
+  top: 0;
+
+  width: 12px;
+  height: 100%;
+
+  background: linear-gradient(
+    to bottom,
+    #94a3b8,
+    #334155
+  );
+
+  border-radius: 10px;
+}
+
+.support-left {
+  left: 20%;
+  transform: rotate(25deg);
+}
+
+.support-right {
+  right: 20%;
+  transform: rotate(-25deg);
+}
+
+/* ---------- GROUND ---------- */
+
+.ground {
+  position: absolute;
+
+  width: 110%;
+  height: 8px;
+
+  left: -5%;
+  bottom: -31%;
+
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--primary),
+    transparent
+  );
+
+  border-radius: 50%;
+  opacity: 0.7;
+}
+
+/* ---------- WHEEL ANIMATION ---------- */
+
+@keyframes wheel {
+
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+
+}
+
+/* ---------- CABIN ANIMATION ---------- */
+
+@keyframes cabins {
+
+  0% {
+    transform: rotate(0deg);
+    background-color: #ef4444;
+  }
+
+  25% {
+    background-color: #facc15;
+  }
+
+  50% {
+    background-color: #a855f7;
+  }
+
+  75% {
+    background-color: #22c55e;
+  }
+
+  100% {
+    transform: rotate(-360deg);
+    background-color: #ef4444;
+  }
+
+}
+
+/* ---------- FOOTER ---------- */
+
+.page-footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.page-footer strong {
+  color: var(--primary);
+}
+
+/* ---------- RESPONSIVE DESIGN ---------- */
+
+@media (max-width: 600px) {
+
+  .scene {
+    padding: 35px 15px 20px;
+    gap: 25px;
+  }
+
+  .wheel-container {
+    width: min(82vw, 380px);
+  }
+
+  .page-header h1 {
+    letter-spacing: -1px;
+  }
+
+  .subtitle {
+    font-size: 13px;
+  }
+
+  .cabin {
+    border-width: 2px;
+    border-radius: 8px 8px 12px 12px;
+  }
+
+}
+
+/* ---------- REDUCED MOTION ACCESSIBILITY ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .wheel,
+  .cabin {
+    animation: none;
+  }
+
+}
